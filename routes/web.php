@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,21 +15,28 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('pages.app.dashboard-siakad',  ['type_menu' => '']);
+    return view('pages.auth.login');
 });
 
-Route::get('/login', function () {
-    return view('pages.auth.login');
-})->name('login');
+Route::middleware(['auth'])->group(function () {
+    Route::get('home', function() {
+        return view('pages.app.dashboard-siakad', ['type_menu' => '']);
+    })->name('home');
+    Route::resource('user', UserController::class);
+});
 
-Route::get('/register', function () {
-    return view('pages.auth.register');
-})->name('register');
+// Route::get('/login', function () {
+//     return view('pages.auth.login');
+// })->name('login');
 
-Route::get('/forgot', function () {
-    return view('pages.auth.forgot-password');
-})->name('forgot');
+// Route::get('/register', function () {
+//     return view('pages.auth.register');
+// })->name('register');
 
-Route::get('/reset-password', function () {
-    return view('pages.auth.reset-password');
-})->name('reset-password');
+// Route::get('/forgot', function () {
+//     return view('pages.auth.forgot-password');
+// })->name('forgot');
+
+// Route::get('/reset-password', function () {
+//     return view('pages.auth.reset-password');
+// })->name('reset-password');
