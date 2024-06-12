@@ -29,7 +29,7 @@
                 <ul class="dropdown-menu">
                     <li class='{{ Request::is('dashboard-general-dashboard') ? 'active' : '' }}'>
                         <a class="nav-link"
-                            href="{{ url('dashboard-general-dashboard') }}">List Users</a>
+                            href="{{ route('user.index') }}">List Users</a>
                     </li>
                 </ul>
             </li>
